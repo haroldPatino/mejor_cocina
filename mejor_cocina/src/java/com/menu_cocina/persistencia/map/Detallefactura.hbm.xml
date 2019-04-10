@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/04/2019 12:08:01 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.menu_cocina.persistencia.entity.Detallefactura" table="detallefactura" catalog="mejor_menu" optimistic-lock="version">
+        <composite-id name="id" class="com.menu_cocina.persistencia.entity.DetallefacturaId">
+            <key-property name="idFactura" type="int">
+                <column name="IdFactura" />
+            </key-property>
+            <key-property name="idDetalleFactura" type="int">
+                <column name="IdDetalleFactura" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cocinero" class="com.menu_cocina.persistencia.entity.Cocinero" fetch="select">
+            <column name="IdCocinero" not-null="true" />
+        </many-to-one>
+        <many-to-one name="factura" class="com.menu_cocina.persistencia.entity.Factura" update="false" insert="false" fetch="select">
+            <column name="IdFactura" not-null="true" />
+        </many-to-one>
+        <property name="plato" type="string">
+            <column name="Plato" length="100" not-null="true" />
+        </property>
+        <property name="importe" type="string">
+            <column name="Importe" length="100" not-null="true" />
+        </property>
+        <property name="fechaFactura" type="timestamp">
+            <column name="FechaFactura" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

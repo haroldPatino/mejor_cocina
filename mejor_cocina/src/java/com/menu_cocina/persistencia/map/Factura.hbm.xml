@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/04/2019 12:08:01 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.menu_cocina.persistencia.entity.Factura" table="factura" catalog="mejor_menu" optimistic-lock="version">
+        <id name="idFactura" type="java.lang.Integer">
+            <column name="IdFactura" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="camarero" class="com.menu_cocina.persistencia.entity.Camarero" fetch="select">
+            <column name="IdCamarero" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cliente" class="com.menu_cocina.persistencia.entity.Cliente" fetch="select">
+            <column name="IdCliente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="mesa" class="com.menu_cocina.persistencia.entity.Mesa" fetch="select">
+            <column name="IdMesa" not-null="true" />
+        </many-to-one>
+        <property name="fechaFactura" type="timestamp">
+            <column name="FechaFactura" length="19" not-null="true" />
+        </property>
+        <set name="detallefacturas" table="detallefactura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IdFactura" not-null="true" />
+            </key>
+            <one-to-many class="com.menu_cocina.persistencia.entity.Detallefactura" />
+        </set>
+    </class>
+</hibernate-mapping>
